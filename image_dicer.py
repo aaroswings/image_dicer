@@ -16,16 +16,16 @@ parser.add_argument('--fileglob', nargs='+', help='File extensions of input in f
 opt = parser.parse_args()
 print(opt)
 
-def resize_by_long_edge(img, max_size=2048):
+def resize_by_long_edge(img, max_size=512):
     original_size = max(img.size[0], img.size[1])
 
-    if original_size >= MAX_SIZE:
+    if original_size >= max_size:
         if (img.size[0] > img.size[1]):
-            resized_width = MAX_SIZE
-            resized_height = int(round((MAX_SIZE/float(img.size[0]))*img.size[1])) 
+            resized_width = max_size
+            resized_height = int(round((max_size/float(img.size[0]))*img.size[1])) 
         else:
-            resized_height = MAX_SIZE
-            resized_width = int(round((MAX_SIZE/float(img.size[1]))*img.size[0]))
+            resized_height = max_size
+            resized_width = int(round((max_size/float(img.size[1]))*img.size[0]))
 
         img = img.resize((resized_width, resized_height), img.ANTIALIAS)
     return img
